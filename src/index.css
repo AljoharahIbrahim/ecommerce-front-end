@@ -33,8 +33,11 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  padding: 1em;
 }
-
+p{
+  text-align: justify;
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
