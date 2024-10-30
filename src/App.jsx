@@ -4,11 +4,13 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import EcommerceWebsiteRoutes from "./routes/EcommerceWebsiteRoutes";
 import ProductContextData from "./context/ProductContextData";
+import Footer from "./layouts/Footer";
 function App() {
   return (
     <>
       <ProductContextData>
         <EcommerceWebsiteRoutes />
+        <Footer/>
       </ProductContextData>
       {/* <div>
         <a href="https://vite.dev" target="_blank">

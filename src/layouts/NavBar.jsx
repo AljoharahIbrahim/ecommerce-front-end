@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Outlet, Link } from "react-router-dom";
-import Styles from "./styles/NavBar.module.css";
+import Styles from "../styles/NavBar.module.css";
 
 export default function NavBar() {
   return (
