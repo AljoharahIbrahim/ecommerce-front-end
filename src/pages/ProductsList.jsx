@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import { ProductContext } from "../context/ProductContextData";
+import { Link } from "react-router-dom";
 
 export default function ProductsList() {
   // import product context
@@ -15,7 +16,7 @@ export default function ProductsList() {
   }
   if (products) {
     return (
-      <div>
+      <>
         {products.map((product) => (
           <div key={product.productId}>
             <p>
@@ -35,9 +36,12 @@ export default function ProductsList() {
               {product.updatedDate}
             </p>
             <br></br>
+            <Link to={`/productDetails/${product.productId}`} state={product}>
+              Show Details
+            </Link>
           </div>
         ))}
-      </div>
+      </>
     );
   }
 }

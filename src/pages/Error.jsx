@@ -8,11 +8,11 @@ export default function Error() {
         navigate("/");
     };
   return (
-    <div>
+    <>
       <h2> Error!</h2>
       <h3> {error.state}</h3>
       <h3> {error.message}</h3>
       <button onClick={onHandleHomePage}> Go to Hme Page</button>
-    </div>
+    </>
   );
 }

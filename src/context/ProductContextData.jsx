@@ -12,7 +12,6 @@ export default function ProductContextData({ children }) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  // use axios to function that connect with api to get products data inside useeffect
   const getProducts = async () => {
     try {
       setIsLoading(true);

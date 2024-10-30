@@ -7,6 +7,7 @@ import ProductsList from '../pages/ProductsList';
 import Home from '../pages/Home';
 import Error from '../pages/Error';
 import Contact from '../pages/Contact';
+import ProductDetails from '../pages/ProductDetails';
 
 export default function Routes() {
  
@@ -23,6 +24,10 @@ export default function Routes() {
         {
           path: "products",
           element: <ProductsList />,
+        },
+        {
+          path: "productDetails/:id",
+          element: <ProductDetails />,
         },
         {
           path: "contact",
