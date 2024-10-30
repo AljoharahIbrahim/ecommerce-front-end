@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate, useRouteError } from 'react-router-dom'
 
-export default function ErrorPage() {
+export default function Error() {
     const error = useRouteError();
     const navigate = useNavigate();
     const onHandleHomePage = () => {

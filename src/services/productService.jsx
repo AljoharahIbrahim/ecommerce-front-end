@@ -1,10 +1,8 @@
-import React from 'react'
+import axios from "axios";
 
-export default function productService() {
-    
-  return (
-    <div>
-      
-    </div>
-  )
-}
+export const getAllProducts = async () => {
+  const response = await axios.get(
+    "https://sda-3-onsite-backend-teamwork-py8b.onrender.com/api/v1/products"
+  );
+  return response.data;
+};

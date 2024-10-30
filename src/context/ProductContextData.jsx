@@ -1,32 +1,47 @@
 import React, { createContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-import axios from "axios";
+import { getAllProducts } from "../services/productService";
 
 // create ProductContext
-export const ProductContext = createContext({});
+export const ProductContext = createContext();
 
 export default function ProductContextData({ children }) {
   // ctrate data state
+  const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   // use axios to function that connect with api to get products data inside useeffect
-  const getProducts = () => {
-    axios
-      .get(
-        "https://sda-3-onsite-backend-teamwork-py8b.onrender.com/api/v1/products"
-      )
-      .then((response) => {
-        // console.log("data: ", response.data.data.items.$values[0].name);
-        const productData = response.data.data.items.$values;
-        setProducts(productData);
-      });
+  const getProducts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await getAllProducts();
+      const data = response.data;
+      const productsData = data.items.$values;
+      setProducts(productsData);
+      setData(data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-  useEffect(() => getProducts(), []);
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <div>
-      <ProductContext.Provider value={{ products, setProducts }}>
+      <ProductContext.Provider
+        value={{ data, setData, products, setProducts, isLoading, error }}
+      >
         {children}
       </ProductContext.Provider>
     </div>
   );
 }
+
+ProductContextData.propTypes = {
+  children: PropTypes.node,
+};

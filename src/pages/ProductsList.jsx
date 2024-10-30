@@ -1,17 +1,23 @@
 import React, { useContext } from "react";
+
 import { ProductContext } from "../context/ProductContextData";
 
-export default function ProductsListPage() {
+export default function ProductsList() {
   // import product context
-  const context = useContext(ProductContext);
-  // console.log("context ", context.products);
+  const { products, isLoading, error } = useContext(ProductContext);
 
-  return (
-    <div>
-      <h2>Products List Page</h2>
-      {context.products.length > 0 ? (
-        context.products.map((product) => (
-          <div key={product.id}>
+  if (isLoading) {
+    return <p>Products are loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error.message}</p>;
+  }
+  if (products) {
+    return (
+      <div>
+        {products.map((product) => (
+          <div key={product.productId}>
             <p>
               <strong>Name:</strong>
               {product.name}
@@ -30,10 +36,8 @@ export default function ProductsListPage() {
             </p>
             <br></br>
           </div>
-        ))
-      ) : (
-        <p>no prodect found </p>
-      )}
-    </div>
-  );
+        ))}
+      </div>
+    );
+  }
 }
