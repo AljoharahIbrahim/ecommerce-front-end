@@ -6,6 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import NavBar from '../components/navbar/NavBar';
 import ProductsListPage from '../pages/ProductsListPage';
 import HomePage from '../pages/HomePage';
+import ErrorPage from '../pages/ErrorPage';
 
 export default function EcommerceWebsiteRoutes() {
   // create routers list (path and elements) using createBrowserRouter function
@@ -13,6 +14,7 @@ export default function EcommerceWebsiteRoutes() {
     {
       path: "/",
       element: <NavBar />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
