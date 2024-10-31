@@ -1,5 +1,5 @@
 import React from 'react'
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter} from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 
 import Layout from '../layouts/Layout';
@@ -10,7 +10,7 @@ import Contact from '../pages/Contact';
 import ProductDetails from '../pages/ProductDetails';
 
 export default function Routes() {
- 
+
   const router = createBrowserRouter([
     {
       path: "/",

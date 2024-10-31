@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 import { ProductContext } from "../context/ProductContextData";
 import { Link } from "react-router-dom";
 
+import { getAllProducts } from "../services/productService";
+
 export default function ProductsList() {
   // import product context
   const { products, isLoading, error } = useContext(ProductContext);
@@ -20,20 +22,20 @@ export default function ProductsList() {
         {products.map((product) => (
           <div key={product.productId}>
             <p>
-              <strong>Name:</strong>
+              <strong>Name: </strong>
               {product.name}
             </p>
             <p>
-              <strong>Category:</strong>
+              <strong>Category: </strong>
               {product.categoryName}
             </p>
             <p>
-              <strong>StockQuantity:</strong>
+              <strong>StockQuantity: </strong>
               {product.stockQuantity}
             </p>
             <p>
-              <strong>updatedDate:</strong>
-              {product.updatedDate}
+              <strong>Price: </strong>
+              {product.price}
             </p>
             <br></br>
             <Link to={`/productDetails/${product.productId}`} state={product}>

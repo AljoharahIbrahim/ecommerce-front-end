@@ -11,18 +11,28 @@ export default function ProductDetails() {
   }
   return (
     <>
-      <h2> product details</h2>
-      <strong>Name:</strong>
-      {state.name}
+      <h2> Product Details</h2>
       <p>
-        <strong>Category:</strong>
+        <strong>Name: </strong>
+        {state.name}
+      </p>
+      <p>
+        <strong>Category: </strong>
         {state.categoryName}
       </p>
       <p>
-        <strong>StockQuantity:</strong>
+        <strong>StockQuantity: </strong>
         {state.stockQuantity}
       </p>
-      <strong>updatedDate:</strong>
+      <p>
+        <strong>Price: </strong>
+        {state.price}
+      </p>
+      <p>
+        <strong>Description: </strong>
+        {state.description}
+      </p>
+      <strong>UpdatedDate: </strong>
       {state.updatedDate}
     </>
   );
