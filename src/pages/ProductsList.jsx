@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { ProductContext } from "../context/ProductContextData";
 import { Link } from "react-router-dom";
 
-import { getAllProducts } from "../services/productService";
+import SearchProduct from "../components/products/SearchProduct";
 
 export default function ProductsList() {
   // import product context
@@ -19,6 +19,7 @@ export default function ProductsList() {
   if (products) {
     return (
       <>
+        <SearchProduct/>
         {products.map((product) => (
           <div key={product.productId}>
             <p>

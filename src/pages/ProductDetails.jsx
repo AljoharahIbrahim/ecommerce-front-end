@@ -10,7 +10,8 @@ export default function ProductDetails() {
     return <h1>product not found</h1>;
   }
   return (
-    <>
+      <>
+          
       <h2> Product Details</h2>
       <p>
         <strong>Name: </strong>
