@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
 export default function SearchProduct() {
-
+  const [search, setSearch] = useState("");
+  const habdleSearchChange = (event) => {
+      setSearch(event.target.value);
+  };
   const handleSearchForm = async (event) => {
-    event.preventDefault();
-    // get datda base on search input
-      const productName = document.getElementById("search").value;
-    //   console.log(window.location.href);
-      //update the page 
-      window.location.href = "?searchBy="+productName;
+    event.preventDefault();      
+    // console.log(window.location.href);
+    //update the page
+    window.location.href = "?searchBy=" + search;
   };
   return (
     <div>
@@ -18,6 +19,8 @@ export default function SearchProduct() {
         <input
           type="text"
           id="search"
+          onChange={habdleSearchChange}
+          value={search}
           required
         />
         <button type="submit">search</button>
