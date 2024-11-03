@@ -13,17 +13,23 @@ export default function SearchProduct() {
   };
   return (
     <div>
-      <h3>search product </h3>
-      <form onSubmit={handleSearchForm}>
-        <label htmlFor="search">Search</label>
-        <input
-          type="text"
-          id="search"
-          onChange={habdleSearchChange}
-          value={search}
-          required
-        />
-        <button type="submit">search</button>
+          <form onSubmit={handleSearchForm}>
+            <h4>Search Product</h4>
+        <div className="search-container">
+          <label htmlFor="search"> </label>
+          <input
+            type="text"
+            id="search"
+            className="search-bar"
+            onChange={habdleSearchChange}
+            value={search}
+            placeholder="Enter product name"
+            required
+          />
+          <button type="submit" className="search-button">
+            Search
+          </button>
+        </div>
       </form>
     </div>
   );

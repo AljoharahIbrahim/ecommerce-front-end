@@ -10,8 +10,7 @@ export default function ProductDetails() {
     return <h1>product not found</h1>;
   }
   return (
-      <>
-          
+    <div className="product-card">
       <h2> Product Details</h2>
       <p>
         <strong>Name: </strong>
@@ -35,6 +34,6 @@ export default function ProductDetails() {
       </p>
       <strong>UpdatedDate: </strong>
       {state.updatedDate}
-    </>
+    </div>
   );
 }
