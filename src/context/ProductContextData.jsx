@@ -12,28 +12,43 @@ export default function ProductContextData({ children }) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchValue, setSearchValue] = useState([]);
   const getProducts = async () => {
     try {
       setIsLoading(true);
-      const response = await getAllProducts();
+      const response = await getAllProducts(searchValue);
       const data = response.data;
       const productsData = data.items.$values;
       setProducts(productsData);
       setData(data);
     } catch (error) {
       setError(error);
+  
     } finally {
       setIsLoading(false);
     }
   };
-  useEffect(() => {
-    getProducts();
-  }, []);
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
+    useEffect(() => {
+      getProducts();
+    }, [searchValue]);
+  console.log("searchValue =" + searchValue);
 
   return (
     <div>
       <ProductContext.Provider
-        value={{ data, setData, products, setProducts, isLoading, error }}
+        value={{
+          data,
+          setData,
+          products,
+          setProducts,
+          isLoading,
+          error,
+          searchValue,
+          setSearchValue,
+        }}
       >
         {children}
       </ProductContext.Provider>

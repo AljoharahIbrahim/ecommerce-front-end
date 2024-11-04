@@ -4,18 +4,20 @@ import { ProductContext } from "../context/ProductContextData";
 import { Link } from "react-router-dom";
 
 import SearchProduct from "../components/products/SearchProduct";
+import Error from "./Error";
 
 export default function ProductsList() {
   // import product context
   const { products, isLoading, error } = useContext(ProductContext);
-  console.log(products);
+  // console.log("products.length" + products.length);
   if (isLoading) {
     return <p>Products are loading...</p>;
   }
 
   if (error) {
-    return <p>{error.message}</p>;
+    return <>{<Error message={error.message} />}</>;
   }
+
   if (products) {
     return (
       <>
@@ -25,7 +27,6 @@ export default function ProductsList() {
             {products.map((product) => (
               <div className="product-card" key={product.productId}>
                 <img src={product.image} alt={product.name} />
-                {console.log("product.image" + product.image)}
                 <p>
                   <strong>Name: </strong>
                   {product.name}

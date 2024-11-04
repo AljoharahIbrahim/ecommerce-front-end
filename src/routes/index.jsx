@@ -15,7 +15,7 @@ export default function Routes() {
     {
       path: "/",
       element: <Layout />,
-      errorElement: <Error />,
+      errorElement: <Error/>,
       children: [
         {
           path: "/",
@@ -34,6 +34,10 @@ export default function Routes() {
           element: <Contact />,
         },
       ],
+    },
+    {
+      path: "*",
+      element: <Error message=" Page Not Fount"/>,
     },
   ]);
 

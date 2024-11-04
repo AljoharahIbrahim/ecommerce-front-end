@@ -12,6 +12,7 @@ export default function ProductDetails() {
   return (
     <div className="product-card">
       <h2> Product Details</h2>
+      <img src={state.image} alt={state.name} />
       <p>
         <strong>Name: </strong>
         {state.name}
