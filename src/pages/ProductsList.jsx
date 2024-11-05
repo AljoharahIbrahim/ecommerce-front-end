@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import SearchProduct from "../components/products/SearchProduct";
 import Error from "./Error";
+import Pagenation from "../components/products/Pagenation";
 
 export default function ProductsList() {
   // import product context
@@ -54,6 +55,7 @@ export default function ProductsList() {
             ))}
           </div>
         </div>
+        <Pagenation />
       </>
     );
   }

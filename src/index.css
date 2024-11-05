@@ -235,3 +235,58 @@ body {
 }
 
 
+/* Pagination container */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Style for Previous and Next buttons */
+.pagination button {
+  padding: 12px 25px;
+  background-color: #f5f5f5;
+  color: #007bff;
+  border: 1px solid #ccc;
+  margin: 0 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+  outline: none; /* Remove outline on focus */
+}
+
+
+/* Disabled button styles */
+.pagination button.disabled {
+  background-color: #ddd;
+  color: #aaa;
+  cursor: not-allowed;
+  transform: none; /* Remove hover scale effect */
+}
+
+/* Page number text styling */
+.pagination .page-number {
+  padding: 12px 20px;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Disable the hover effect when button is disabled */
+.previous-page:disabled:hover, .next-page:disabled:hover {
+  background-color: #f5f5f5; /* Keep the background the same as normal */
+  color: #aaa; /* Lighter color */
+  cursor: not-allowed; /* Show the not-allowed cursor */
+  transform: none; /* Remove the scaling effect */
+}
+
+/* Style for the disabled button */
+.previous-page:disabled, .next-page:disabled {
+  background-color: #ddd;
+  color: #aaa;
+  cursor: not-allowed;
+  transform: none; /* Ensure no transform when disabled */
+}
