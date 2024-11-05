@@ -28,6 +28,12 @@ export default function NavBar() {
                   Contact
                 </Link>
               </li>
+              <li className={Styles["nav-item"]}>
+                <Link to="/login" className={Styles["nav-link"]}>
+                  {" "}
+                  Login
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>

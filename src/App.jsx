@@ -4,14 +4,18 @@ import ProductContextData from "./context/ProductContextData";
 import Routes from "./routes";
 import "./App.css";
 import Pagenation from "./components/products/Pagenation";
+import UserContextData from "./context/UserContextData";
+// import UserContextData from "./context/UserContextData";
 
 function App() {
   return (
     <div className="app">
-      <ProductContextData>
-        <Routes />
-        {/* <Pagenation/> */}
-      </ProductContextData>
+      <UserContextData>
+        <ProductContextData>
+          <Routes />
+          {/* <Pagenation/> */}
+        </ProductContextData>
+      </UserContextData>
     </div>
   );
 }

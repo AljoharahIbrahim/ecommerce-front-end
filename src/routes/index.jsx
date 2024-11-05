@@ -8,6 +8,7 @@ import Home from '../pages/Home';
 import Error from '../pages/Error';
 import Contact from '../pages/Contact';
 import ProductDetails from '../pages/ProductDetails';
+import Login from '../pages/Login';
 
 export default function Routes() {
 
@@ -15,7 +16,7 @@ export default function Routes() {
     {
       path: "/",
       element: <Layout />,
-      errorElement: <Error/>,
+      errorElement: <Error />,
       children: [
         {
           path: "/",
@@ -33,11 +34,15 @@ export default function Routes() {
           path: "contact",
           element: <Contact />,
         },
+        {
+          path: "login",
+          element: <Login />,
+        },
       ],
     },
     {
       path: "*",
-      element: <Error message=" Page Not Fount"/>,
+      element: <Error message=" Page Not Fount" />,
     },
   ]);
 

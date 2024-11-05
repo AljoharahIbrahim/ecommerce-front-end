@@ -60,7 +60,7 @@ export const getAllProducts = async (
   if (sortOrder) {
     params.append("Sort", sortOrder);
   }
-  console.log(`LINK: ${productUrl}?${params.toString()}`);
+  // console.log(`LINK: ${productUrl}?${params.toString()}`);
   const response = await axios.get(`${productUrl}?${params.toString()}`);
   return response.data;
 };

@@ -27,18 +27,18 @@ export default function ProductContextData({ children }) {
         searchValue,
         sort
       );
-      console.log("***********from product services*************");
-      console.log(response);
+      // console.log("***********from product services*************");
+      // console.log(response);
       const data = response.data;
-      console.log("data=" + data);
+      // console.log("data=" + data);
       const productsData = data.items.$values;
-      console.log("productsData" + productsData);
+      // console.log("productsData" + productsData);
       setProducts(productsData);
       // setTotalPages(data.totalItems);
       // const totalItems = data.items.$values.length;
       const totalItems = data.totalItems;
-      console.log("totalItems=> " + totalItems + " | pageSize=>" + pageSize);
-      console.log("totalItems / pageSize =" + Math.ceil(totalItems / pageSize));
+      // console.log("totalItems=> " + totalItems + " | pageSize=>" + pageSize);
+      // console.log("totalItems / pageSize =" + Math.ceil(totalItems / pageSize));
       setTotalPages(Math.ceil(totalItems / pageSize));
       setData(data);
     } catch (error) {
@@ -51,7 +51,7 @@ export default function ProductContextData({ children }) {
   useEffect(() => {
     getProducts();
   }, [searchValue, pageNumber, pageSize, sort]);
-  console.log("searchValue =" + searchValue);
+  // console.log("searchValue =" + searchValue);
 
   return (
     <div>
