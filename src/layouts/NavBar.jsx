@@ -6,7 +6,7 @@ import { UserContext } from "../context/UserContextData";
 
 export default function NavBar() {
   const [isDisabled, setIsDisabled] = useState(false);
-  const { setLoginData, setUserEmail, setUserPassword } =
+  const { setLoginData, setUserEmail, setUserPassword, userID } =
     useContext(UserContext);
 
   // in case local storage not empty show the logout button
@@ -17,7 +17,7 @@ export default function NavBar() {
     } else {
       setIsDisabled(false);
     }
-  }, []);
+  }, [userID]);
 
   const navigate = useNavigate();
   const logout = () => {
@@ -54,7 +54,11 @@ export default function NavBar() {
                 </Link>
               </li>
               <li className={Styles["nav-item"]}>
-                <Link to="/login" className={Styles["nav-link"]}>
+                <Link
+                  to="/login"
+                  className={Styles["nav-link"]}
+                  style={{ display: isDisabled ? "inline":"none" }}
+                >
                   {" "}
                   Login
                 </Link>
