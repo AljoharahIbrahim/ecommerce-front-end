@@ -10,7 +10,6 @@ import Contact from '../pages/Contact';
 import ProductDetails from '../pages/ProductDetails';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
-import Logout from '../pages/Logout';
 
 export default function Routes() {
 
@@ -39,10 +38,6 @@ export default function Routes() {
         {
           path: "login",
           element: <Login />,
-        },
-        {
-          path: "logout",
-          element: <Logout />,
         },
         {
           path: "profile",
