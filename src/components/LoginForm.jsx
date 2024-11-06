@@ -6,10 +6,8 @@ import Error from "../pages/Error";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-
-
 export default function LoginForm() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     userEmail,
@@ -21,6 +19,10 @@ const navigate = useNavigate();
     isLoading,
     error,
     userToken,
+    userID,
+    setUserID,
+    loginData,
+    setLoginData,
   } = useContext(UserContext);
 
   //1. create handel form submit
@@ -42,20 +44,34 @@ const navigate = useNavigate();
 
   // 3. use useeffect to accses usertoken after updates
   useEffect(() => {
-      if (userData) {
-        //4. in case return tokens => set in local storage
-        console.log("userData=** ", userData);
-        localStorage.setItem(
-          "login",
-          JSON.stringify({ userToken: userData, isSignIn: true })
-        );
-        console.log("success");
-        const token = userData;
-        const decoded = jwtDecode(token);
-        console.log(decoded);
-        //5. call getUserByID => go to profile user " navigatee and send user data in state"
+    if (loginData) {
+      //4. in case return tokens => set in local storage
+      //   console.log("userData=** ", userData);
+      localStorage.setItem(
+        "login",
+        JSON.stringify({ userToken: loginData, isSignIn: true })
+      );
+      //   console.log("success");
+      const token = loginData;
+      const decoded = jwtDecode(token);
+      //   console.log(decoded);
+      const UserId = decoded.UserId;
+      setUserID(UserId);
+      if (userID) {
+        console.log("#userData", userData);
+        navigate("/profile", { state: userData });
       }
+    }
   }, [userToken, userData]);
+    
+    // useEffect(() => {
+    //   //5.call getUserByID => go to profile user " navigatee and send user data in state"
+    //   const allow= false;
+    //   if (allow ) {
+    //     console.log("#userData", userData);
+    //     navigate("/profile", { state: userData });
+    //   }
+    // }, [userID]);
 
   return (
     <div>

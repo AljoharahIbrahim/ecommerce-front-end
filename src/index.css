@@ -291,3 +291,41 @@ body {
   transform: none; /* Ensure no transform when disabled */
 }
 
+/* Profile container */
+.profile {
+  max-width: 400px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile header */
+.profile-header {
+  background-color: #264c75;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Profile info section */
+.profile-info {
+  padding: 20px;
+}
+
+.profile-item {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.profile-item strong {
+  font-weight: bold;
+  color: #333;
+}
