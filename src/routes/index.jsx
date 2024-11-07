@@ -10,6 +10,10 @@ import Contact from '../pages/Contact';
 import ProductDetails from '../pages/ProductDetails';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
+import UserRoute from './UserRoute';
+import AdminRoute from './AdminRoute';
+import UserDashboard from '../pages/UserDashboard';
+import AdminDashboard from '../pages/AdminDashboard';
 
 export default function Routes() {
 
@@ -42,6 +46,26 @@ export default function Routes() {
         {
           path: "profile",
           element: <Profile />,
+        },
+        {
+          path: "/dashboard/users",
+          element: <UserRoute />,
+          children: [
+            {
+              path: "/dashboard/users/view",
+              element: <UserDashboard />,
+            },
+          ],
+        },
+        {
+          path: "/dashboard/admins",
+          element: <AdminRoute />,
+          children: [
+            {
+              path: "/dashboard/admins/view",
+              element: <AdminDashboard />,
+            },
+          ],
         },
       ],
     },

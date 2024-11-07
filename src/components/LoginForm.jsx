@@ -46,32 +46,45 @@ export default function LoginForm() {
   useEffect(() => {
     if (loginData) {
       //4. in case return tokens => set in local storage
-      //   console.log("userData=** ", userData);
-      localStorage.setItem(
-        "login",
-        JSON.stringify({ userToken: loginData, isSignIn: true })
-      );
+        console.log("!!!!userData login form=** ", userData);
       //   console.log("success");
       const token = loginData;
       const decoded = jwtDecode(token);
-      //   console.log(decoded);
+      console.log("decoded role=", decoded.role);
+
+      console.log("decoded.isAdmin", decoded.isAdmin);
       const UserId = decoded.UserId;
       setUserID(UserId);
+      let checkIsAdmin;
+      if (decoded.role === "Admin") {
+        checkIsAdmin = true;
+      } else {
+        checkIsAdmin = false;
+      }
+        localStorage.setItem(
+          "login",
+          JSON.stringify({
+            userToken: loginData,
+            isSignIn: true,
+            isAdmin: checkIsAdmin,
+          })
+        );
+
       if (userID) {
         console.log("#userData", userData);
         navigate("/profile", { state: userData });
       }
     }
   }, [userToken, userData]);
-    
-    // useEffect(() => {
-    //   //5.call getUserByID => go to profile user " navigatee and send user data in state"
-    //   const allow= false;
-    //   if (allow ) {
-    //     console.log("#userData", userData);
-    //     navigate("/profile", { state: userData });
-    //   }
-    // }, [userID]);
+
+  // useEffect(() => {
+  //   //5.call getUserByID => go to profile user " navigatee and send user data in state"
+  //   const allow= false;
+  //   if (allow ) {
+  //     console.log("#userData", userData);
+  //     navigate("/profile", { state: userData });
+  //   }
+  // }, [userID]);
 
   return (
     <div>
