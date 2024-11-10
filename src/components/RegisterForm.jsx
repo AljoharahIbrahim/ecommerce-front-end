@@ -142,7 +142,7 @@ export default function RegisterForm() {
             Register
           </button>
         </form>
-        <ToastContainer />
+        <ToastContainer disable/>
       </div>
     </div>
   );

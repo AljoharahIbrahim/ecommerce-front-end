@@ -99,3 +99,17 @@ export const createNewProduct = async (
     return response;
   }
 };
+
+// DELETE Product end point
+export const deleteProductByID = async (productID, adminToken) => {
+  
+  if (productID && adminToken)
+  {
+    const response = await axios.delete(`${productUrl}/${productID}`,{
+      headers: { Authorization: `Bearer ${adminToken}` },
+    });
+    console.log("deleteProductByID response", response);
+    return response;
+  }
+};
+

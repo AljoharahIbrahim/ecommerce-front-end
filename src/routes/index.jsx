@@ -16,6 +16,7 @@ import UserDashboard from '../pages/UserDashboard';
 import AdminDashboard from '../pages/AdminDashboard';
 import Register from '../pages/Register';
 import AddProduct from '../pages/AddProduct';
+import DeleteProduct from '../pages/DeleteProduct';
 
 export default function Routes() {
 
@@ -74,6 +75,10 @@ export default function Routes() {
             {
               path: "/dashboard/admins/addProduct",
               element: <AddProduct />,
+            },
+            {
+              path: "/dashboard/admins/deleteProduct",
+              element: <DeleteProduct />,
             },
           ],
         },

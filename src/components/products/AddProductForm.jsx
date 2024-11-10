@@ -36,10 +36,16 @@ export default function AddProductForm() {
       productCategoryID: createProduct.productCategoryID,
     });
     setCreateProductStatus(true);
+    // setResponeSuccessCreateProduct(true);
   };
 
   useEffect(() => {
-    console.log("***************", responeSuccessCreateProduct);
+    console.log(
+      "responeSuccessCreateProduct",
+      responeSuccessCreateProduct,
+      "createProductStatus",
+      createProductStatus
+    );
     if (responeSuccessCreateProduct) {
       setResponeSuccessCreateProduct(false);
       // return Success message

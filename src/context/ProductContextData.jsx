@@ -1,7 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { getAllProducts, createNewProduct } from "../services/productService";
+import {
+  getAllProducts,
+  createNewProduct,
+  deleteProductByID,
+} from "../services/productService";
 
 // create ProductContext
 export const ProductContext = createContext();
@@ -17,19 +21,23 @@ export default function ProductContextData({ children }) {
   const [totalPages, setTotalPages] = useState(1);
   const [searchValue, setSearchValue] = useState([]);
   const [sort, setSort] = useState("");
-  // create product useState 
+  // create product useState
   const [createProduct, setCreateProduct] = useState({
-    productName :"",
-    productPrice:"",
-    productDescription:"",
-    productImage:"",
-    productStockQuantity:"",
-    productCategoryID:"",
+    productName: "",
+    productPrice: "",
+    productDescription: "",
+    productImage: "",
+    productStockQuantity: "",
+    productCategoryID: "",
   });
   const [adminToken, setAdminToken] = useState("");
   const [createProductStatus, setCreateProductStatus] = useState(false);
-  const [responeSuccessCreateProduct, setResponeSuccessCreateProduct] = useState(false);
-  //
+  const [responeSuccessCreateProduct, setResponeSuccessCreateProduct] =
+    useState(false);
+  // for delete product 
+  const [deleteProductID, setDeleteProductID] = useState(null);
+  const [createDeleteProductOrder, setCreateDeleteProductOrder] = useState(false);
+  const [productDeleteResponse, setProductDeleteResponse] = useState(false);
 
   const getProducts = async () => {
     try {
@@ -61,32 +69,54 @@ export default function ProductContextData({ children }) {
     }
   };
 
-  // create product 
+  // create product
   const addNewProduct = async () => {
     console.log("addNewProduct");
     try {
-
-    setIsLoading(true);
-    // call product create product service
-    const response = await createNewProduct(
-      createProduct.productName,
-      createProduct.productPrice,
-      createProduct.productDescription,
-      createProduct.productImage,
-      createProduct.productStockQuantity,
-      createProduct.productCategoryID,
-      adminToken
-    );
+      setIsLoading(true);
+      // call product create product service
+      const response = await createNewProduct(
+        createProduct.productName,
+        createProduct.productPrice,
+        createProduct.productDescription,
+        createProduct.productImage,
+        createProduct.productStockQuantity,
+        createProduct.productCategoryID,
+        adminToken
+      );
       console.log("addNewProduct response =>", response);
+      console.log(
+        " before :setResponeSuccessCreateProduct response =>",
+        responeSuccessCreateProduct
+      );
+
       setResponeSuccessCreateProduct(true);
-  } catch (error) {
-    setError(error);
-    
-  } finally {
-    setIsLoading(false);
+      console.log(
+        "after :setResponeSuccessCreateProduct response =>",
+        responeSuccessCreateProduct
+      );
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+  // delete product 
+  const deleteProduct = async () => {
+    console.log("**deleteProduct response");
+  try {
+    setIsLoading(true);
+    const response = await deleteProductByID(deleteProductID, adminToken);
+    console.log(" deleteProduct response", response);
+    setProductDeleteResponse(true);
+  }
+  catch (error) {
+    setError(error);
+  } finally {
+    setIsLoading(false);
 
+  } 
+  };
   //
   useEffect(() => {
     getProducts();
@@ -96,6 +126,12 @@ export default function ProductContextData({ children }) {
   useEffect(() => {
     addNewProduct();
   }, [createProductStatus]);
+
+  //
+   useEffect(() => {
+     deleteProduct();
+   }, [createDeleteProductOrder]);
+
 
   return (
     <div>
@@ -125,6 +161,11 @@ export default function ProductContextData({ children }) {
           setCreateProductStatus,
           responeSuccessCreateProduct,
           setResponeSuccessCreateProduct,
+          deleteProductID,
+          setDeleteProductID,
+          createDeleteProductOrder,
+          setCreateDeleteProductOrder,
+          productDeleteResponse,
         }}
       >
         {children}
