@@ -1,11 +1,19 @@
 import React, { createContext, useEffect, useState } from "react";
 
-import { getUserById, login } from "../services/userService";
+import { getUserById, login, register } from "../services/userService";
 import PropTypes from "prop-types";
 
 export const UserContext = createContext();
 
 export default function UserContextData({ children }) {
+  const [registerUser, setRegisterUser] = useState({
+    UserName: "",
+    Email: "",
+    Password: "",
+    Address: "",
+    PhoneNumber: "",
+  });
+    const [createUser, setCreateUser] = useState(false);
   // ctrate data state
   const [checkUserData, setCheckUserData] = useState({
     userEmail: "",
@@ -15,6 +23,8 @@ export default function UserContextData({ children }) {
   const [loginData, setLoginData] = useState(null); // this get information from end point
 
   const [isLoading, setIsLoading] = useState(false);
+  const [responeSuccessRegister, setResponeSuccessRegister] = useState(false);
+
   const [error, setError] = useState(null);
   const [userToken, setUserToken] = useState(null);
 
@@ -22,6 +32,27 @@ export default function UserContextData({ children }) {
   const [userPassword, setUserPassword] = useState(""); // this for login form component to easy handle and send it to api , we can later composite as object
   const [userID, setUserID] = useState(null);
 
+  const getUserRegiterationInformation = async () => {
+    console.log("getUserRegiterationInformation");
+    try {
+      setIsLoading(true);
+      const response = await register(
+        registerUser.UserName,
+        registerUser.Email,
+        registerUser.Password,
+        registerUser.Address,
+        registerUser.PhoneNumber
+      );
+      console.log("%response.data", response.data);
+      setUserData(response.data);
+      setResponeSuccessRegister(true);
+      return response.success;
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   const getUserLoginInformation = async () => {
     console.log("**UserContextData");
     try {
@@ -68,6 +99,10 @@ export default function UserContextData({ children }) {
     getUserByIdInformation();
   }, [userID]);
 
+  useEffect(() => {
+    getUserRegiterationInformation();
+  }, [createUser]);
+
   return (
     <>
       <UserContext.Provider
@@ -89,6 +124,12 @@ export default function UserContextData({ children }) {
           setUserID,
           loginData,
           setLoginData,
+          registerUser,
+          setRegisterUser,
+          createUser,
+          setCreateUser,
+          responeSuccessRegister,
+          setResponeSuccessRegister,
         }}
       >
         {children}

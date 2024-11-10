@@ -9,7 +9,7 @@ console.log("AdminRoute");
  return (
    <div>
      {" "}
-     <h3>AdminRoute</h3>
+     {/* <h3>AdminRoute</h3> */}
      {checkAdmin != null && checkAdmin.isSignIn && checkAdmin.isAdmin ? (
        <Outlet />
      ) : (

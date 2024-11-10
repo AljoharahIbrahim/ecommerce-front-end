@@ -72,7 +72,13 @@ export default function LoginForm() {
 
       if (userID) {
         console.log("#userData", userData);
-        navigate("/profile", { state: userData });
+        // go to dashboard base on type of user 
+        if (checkIsAdmin) {
+          navigate("/dashboard/admins/view", { state: userData });
+        } else {
+          navigate("/dashboard/users/view", { state: userData });
+        }
+          // navigate("/profile", { state: userData });
       }
     }
   }, [userToken, userData]);

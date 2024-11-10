@@ -14,6 +14,8 @@ import UserRoute from './UserRoute';
 import AdminRoute from './AdminRoute';
 import UserDashboard from '../pages/UserDashboard';
 import AdminDashboard from '../pages/AdminDashboard';
+import Register from '../pages/Register';
+import AddProduct from '../pages/AddProduct';
 
 export default function Routes() {
 
@@ -44,6 +46,10 @@ export default function Routes() {
           element: <Login />,
         },
         {
+          path: "register",
+          element: <Register />,
+        },
+        {
           path: "profile",
           element: <Profile />,
         },
@@ -64,6 +70,10 @@ export default function Routes() {
             {
               path: "/dashboard/admins/view",
               element: <AdminDashboard />,
+            },
+            {
+              path: "/dashboard/admins/addProduct",
+              element: <AddProduct />,
             },
           ],
         },

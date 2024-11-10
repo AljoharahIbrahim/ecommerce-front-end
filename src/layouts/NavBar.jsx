@@ -6,16 +6,24 @@ import { UserContext } from "../context/UserContextData";
 
 export default function NavBar() {
   const [isDisabled, setIsDisabled] = useState(false);
-  const { setLoginData, setUserEmail, setUserPassword, userID } =
-    useContext(UserContext);
+  const [isDisabledRegister, setIsDisabledRegister] = useState(true);
+
+  const {
+    setLoginData,
+    setUserEmail,
+    setUserPassword,
+    userID,
+  } = useContext(UserContext);
 
   // in case local storage not empty show the logout button
   useEffect(() => {
     const checkStorage = localStorage.getItem("login");
     if (checkStorage === null) {
       setIsDisabled(true);
+      setIsDisabledRegister(true);
     } else {
       setIsDisabled(false);
+      setIsDisabledRegister(false);
     }
   }, [userID]);
 
@@ -27,6 +35,7 @@ export default function NavBar() {
     setUserPassword();
     // hide logoutbutton after delete storgae
     setIsDisabled(true);
+    setIsDisabledRegister(true);
     navigate("/");
   };
   return (
@@ -57,7 +66,7 @@ export default function NavBar() {
                 <Link
                   to="/login"
                   className={Styles["nav-link"]}
-                  style={{ display: isDisabled ? "inline":"none" }}
+                  style={{ display: isDisabled ? "inline" : "none" }}
                 >
                   {" "}
                   Login
@@ -71,6 +80,16 @@ export default function NavBar() {
                 >
                   {" "}
                   Logout
+                </Link>
+              </li>
+              <li className={Styles["nav-item"]}>
+                <Link
+                  to="/register"
+                  className={Styles["nav-link"]}
+                  style={{ display: isDisabledRegister ? "inline" : "none" }}
+                >
+                  {" "}
+                  Register
                 </Link>
               </li>
             </ul>

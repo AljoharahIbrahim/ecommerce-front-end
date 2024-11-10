@@ -1,4 +1,7 @@
 import axios from "axios";
+
+const productUrl =
+  "https://sda-3-onsite-backend-teamwork-py8b.onrender.com/api/v1/products";
 // export const getAllProductsByName = async (productName) => {
 //   console.log(productName);
 //   // extract the variable of url for pagenation & search & sort by
@@ -40,14 +43,16 @@ import axios from "axios";
 //----
 
 //Page=2&PageSize=2&SearchBy=books&Sort=asc
+
+// GET Product => getAllProducts end point
 export const getAllProducts = async (
   pageNumber = 1,
   pageSize = 4,
   searchValue = "",
   sortOrder = "asc"
 ) => {
-  const productUrl =
-    "https://sda-3-onsite-backend-teamwork-py8b.onrender.com/api/v1/products";
+  // const productUrl =
+  //   "https://sda-3-onsite-backend-teamwork-py8b.onrender.com/api/v1/products";
   const params = new URLSearchParams();
 
   params.append("Page", pageNumber);
@@ -63,4 +68,34 @@ export const getAllProducts = async (
   // console.log(`LINK: ${productUrl}?${params.toString()}`);
   const response = await axios.get(`${productUrl}?${params.toString()}`);
   return response.data;
+};
+
+// POST Product end point
+export const createNewProduct = async (
+  productName,
+  productPrice,
+  productDescription,
+  productImage,
+  productStockQuantity,
+  productCategoryID,
+  adminToken
+) => {
+  // create an object of product data
+  const productData = {
+    name: productName,
+    price: productPrice,
+    description: productDescription,
+    image: productImage,
+    stockQuantity: productStockQuantity,
+    categoryID: productCategoryID,
+  };
+  // check if product not null
+  if (productData && adminToken) {
+    // call POST product end point
+    const response = await axios.post(`${productUrl}`, productData, {
+      headers: { Authorization: `Bearer ${adminToken}` },
+    });
+    console.log(response);
+    return response;
+  }
 };
