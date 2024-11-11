@@ -7,25 +7,29 @@ import { UserContext } from "../context/UserContextData";
 export default function NavBar() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isDisabledRegister, setIsDisabledRegister] = useState(true);
-
+  // const [checkAdmin, setCheckAdmin] = useState();
   const {
     setLoginData,
     setUserEmail,
     setUserPassword,
     userID,
   } = useContext(UserContext);
-
-  // in case local storage not empty show the logout button
-  useEffect(() => {
-    const checkStorage = localStorage.getItem("login");
-    if (checkStorage === null) {
-      setIsDisabled(true);
-      setIsDisabledRegister(true);
-    } else {
-      setIsDisabled(false);
-      setIsDisabledRegister(false);
-    }
-  }, [userID]);
+  // type of user
+  // const checkIsAdmin = JSON.parse(localStorage.getItem("login"));
+  // if (checkIsAdmin != null && checkIsAdmin.isSignIn && checkIsAdmin.isAdmin) {
+  //   setCheckAdmin(true);
+  // }
+    // in case local storage not empty show the logout button
+    useEffect(() => {
+      const checkStorage = localStorage.getItem("login");
+      if (checkStorage === null) {
+        setIsDisabled(true);
+        setIsDisabledRegister(true);
+      } else {
+        setIsDisabled(false);
+        setIsDisabledRegister(false);
+      }
+    }, [userID]);
 
   const navigate = useNavigate();
   const logout = () => {
@@ -72,6 +76,7 @@ export default function NavBar() {
                   Login
                 </Link>
               </li>
+
               <li className={Styles["nav-item"]}>
                 <Link
                   onClick={logout}
@@ -81,7 +86,16 @@ export default function NavBar() {
                   {" "}
                   Logout
                 </Link>
-              </li>
+                </li>
+                {/* <li className={Styles["nav-item"]}>
+                <Link to= {checkAdmin ? "/dashboard/admins" : "/dashboard/users"}
+                    className={Styles["nav-link"]}
+                    style={{ display: isDisabled ? "none" : "inline" }}
+                  >
+                    {" "}
+                    profile
+                  </Link>
+              </li> */}
               <li className={Styles["nav-item"]}>
                 <Link
                   to="/register"

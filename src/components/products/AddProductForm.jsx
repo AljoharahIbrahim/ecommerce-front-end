@@ -10,7 +10,6 @@ export default function AddProductForm() {
   const {
     createProduct,
     setCreateProduct,
-    adminToken,
     setAdminToken,
     createProductStatus,
     setCreateProductStatus,

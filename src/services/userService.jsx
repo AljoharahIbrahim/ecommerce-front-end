@@ -20,8 +20,13 @@ export const login = async (email, password) => {
 };
 
 // Post user => register endpoint
-export const register = async (UserName, Email, Password, Address, phoneNumber) => {
-
+export const register = async (
+  UserName,
+  Email,
+  Password,
+  Address,
+  phoneNumber
+) => {
   const userData = {
     UserName: UserName,
     Email: Email,
@@ -43,11 +48,14 @@ export const register = async (UserName, Email, Password, Address, phoneNumber) 
   }
 };
 
-// Get User/id = > getUserById endpoint 
-export const getUserById = async (userID,token) => {
+// Get User/id = > getUserById endpoint
+export const getUserById = async (userID, token) => {
   console.log("userID=", userID);
-  const userUrl ="https://sda-3-onsite-backend-teamwork-py8b.onrender.com/api/v1/users";
-  const response = await axios.get(`${userUrl}/${userID}`,{headers:{Authorization:`Bearer ${token}`}});
+  const userUrl =
+    "https://sda-3-onsite-backend-teamwork-py8b.onrender.com/api/v1/users";
+  const response = await axios.get(`${userUrl}/${userID}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   console.log(response);
   return response.data;
 };

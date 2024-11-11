@@ -5,6 +5,7 @@ import {
   getAllProducts,
   createNewProduct,
   deleteProductByID,
+  updateProduct,
 } from "../services/productService";
 
 // create ProductContext
@@ -17,7 +18,7 @@ export default function ProductContextData({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(100);
   const [totalPages, setTotalPages] = useState(1);
   const [searchValue, setSearchValue] = useState([]);
   const [sort, setSort] = useState("");
@@ -34,10 +35,16 @@ export default function ProductContextData({ children }) {
   const [createProductStatus, setCreateProductStatus] = useState(false);
   const [responeSuccessCreateProduct, setResponeSuccessCreateProduct] =
     useState(false);
-  // for delete product 
+  // for delete product
   const [deleteProductID, setDeleteProductID] = useState(null);
-  const [createDeleteProductOrder, setCreateDeleteProductOrder] = useState(false);
+  const [createDeleteProductOrder, setCreateDeleteProductOrder] =
+    useState(false);
   const [productDeleteResponse, setProductDeleteResponse] = useState(false);
+  // for update product
+  const [productData, setProductData] = useState({});
+  const [productID, setProductID] = useState();
+  const [updateProductOrder, setUpdateProductOrder] = useState(false);
+  const [productUpdateResponse, setProductUpdateResponse] = useState(false);
 
   const getProducts = async () => {
     try {
@@ -101,22 +108,39 @@ export default function ProductContextData({ children }) {
       setIsLoading(false);
     }
   };
-  // delete product 
+  // delete product
   const deleteProduct = async () => {
     console.log("**deleteProduct response");
-  try {
-    setIsLoading(true);
-    const response = await deleteProductByID(deleteProductID, adminToken);
-    console.log(" deleteProduct response", response);
-    setProductDeleteResponse(true);
-  }
-  catch (error) {
-    setError(error);
-  } finally {
-    setIsLoading(false);
-
-  } 
+    try {
+      setIsLoading(true);
+      const response = await deleteProductByID(deleteProductID, adminToken);
+      console.log(" deleteProduct response", response);
+      setProductDeleteResponse(true);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  // update Product
+  const updateProductByID = async () => {
+    try {
+      setIsLoading(true);
+      console.log("updateProductByID=>", productData, productID, adminToken);
+      const response = await updateProduct(productData, productID, adminToken);
+      console.log(response);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // useEffect
+  useEffect(() => {
+    getProducts();
+  }, []);
   //
   useEffect(() => {
     getProducts();
@@ -128,10 +152,14 @@ export default function ProductContextData({ children }) {
   }, [createProductStatus]);
 
   //
-   useEffect(() => {
-     deleteProduct();
-   }, [createDeleteProductOrder]);
+  useEffect(() => {
+    deleteProduct();
+  }, [createDeleteProductOrder]);
 
+  //
+  useEffect(() => {
+    updateProductByID();
+  }, [updateProductOrder]);
 
   return (
     <div>
@@ -166,6 +194,14 @@ export default function ProductContextData({ children }) {
           createDeleteProductOrder,
           setCreateDeleteProductOrder,
           productDeleteResponse,
+          productData,
+          setProductData,
+          productID,
+          setProductID,
+          updateProductOrder,
+          setUpdateProductOrder,
+          productUpdateResponse,
+          setProductUpdateResponse,
         }}
       >
         {children}

@@ -102,10 +102,8 @@ export const createNewProduct = async (
 
 // DELETE Product end point
 export const deleteProductByID = async (productID, adminToken) => {
-  
-  if (productID && adminToken)
-  {
-    const response = await axios.delete(`${productUrl}/${productID}`,{
+  if (productID && adminToken) {
+    const response = await axios.delete(`${productUrl}/${productID}`, {
       headers: { Authorization: `Bearer ${adminToken}` },
     });
     console.log("deleteProductByID response", response);
@@ -113,3 +111,14 @@ export const deleteProductByID = async (productID, adminToken) => {
   }
 };
 
+// PUT product endpoint 
+export const updateProduct = async (productData, productID, adminToken) =>
+{
+  if (productData && productID && adminToken) {
+    const response = await axios.put(`${productUrl}/${productID}`, productData, {
+      headers: { Authorization: `Bearer ${adminToken}`},
+    });
+    console.log("updateProduct response ", response);
+    return response;
+  }
+};

@@ -1,25 +1,25 @@
-import React from 'react'
-import { createBrowserRouter} from "react-router-dom";
+import React from "react";
+import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 
-import Layout from '../layouts/Layout';
-import ProductsList from '../pages/ProductsList';
-import Home from '../pages/Home';
-import Error from '../pages/Error';
-import Contact from '../pages/Contact';
-import ProductDetails from '../pages/ProductDetails';
-import Login from '../pages/Login';
-import Profile from '../pages/Profile';
-import UserRoute from './UserRoute';
-import AdminRoute from './AdminRoute';
-import UserDashboard from '../pages/UserDashboard';
-import AdminDashboard from '../pages/AdminDashboard';
-import Register from '../pages/Register';
-import AddProduct from '../pages/AddProduct';
-import DeleteProduct from '../pages/DeleteProduct';
+import Layout from "../layouts/Layout";
+import ProductsList from "../pages/ProductsList";
+import Home from "../pages/Home";
+import Error from "../pages/Error";
+import Contact from "../pages/Contact";
+import ProductDetails from "../pages/ProductDetails";
+import Login from "../pages/Login";
+import Profile from "../pages/Profile";
+import UserRoute from "./UserRoute";
+import AdminRoute from "./AdminRoute";
+import UserDashboard from "../pages/UserDashboard";
+import AdminDashboard from "../pages/AdminDashboard";
+import Register from "../pages/Register";
+import AddProduct from "../pages/AddProduct";
+import DeleteProduct from "../pages/DeleteProduct";
+import UpdateProdut from "../pages/UpdateProdut";
 
 export default function Routes() {
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -80,6 +80,10 @@ export default function Routes() {
               path: "/dashboard/admins/deleteProduct",
               element: <DeleteProduct />,
             },
+            {
+              path: "/dashboard/admins/updateProduct",
+              element: <UpdateProdut />,
+            },
           ],
         },
       ],
@@ -90,9 +94,9 @@ export default function Routes() {
     },
   ]);
 
-    return (
-      <div>
-        <RouterProvider router={router} />
-      </div>
-    );
+  return (
+    <div>
+      <RouterProvider router={router} />
+    </div>
+  );
 }
