@@ -5,6 +5,7 @@ import Routes from "./routes";
 import "./App.css";
 import Pagenation from "./components/products/Pagenation";
 import UserContextData from "./context/UserContextData";
+import CartContextData from "./context/CartContextData";
 // import UserContextData from "./context/UserContextData";
 
 function App() {
@@ -12,8 +13,10 @@ function App() {
     <div className="app">
       <UserContextData>
         <ProductContextData>
-          <Routes />
-          {/* <Pagenation/> */}
+          <CartContextData>
+            <Routes />
+            {/* <Pagenation/> */}
+          </CartContextData>
         </ProductContextData>
       </UserContextData>
     </div>

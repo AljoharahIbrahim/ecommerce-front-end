@@ -18,6 +18,8 @@ import Register from "../pages/Register";
 import AddProduct from "../pages/AddProduct";
 import DeleteProduct from "../pages/DeleteProduct";
 import UpdateProdut from "../pages/UpdateProdut";
+import Cart from "../pages/Cart";
+import Carts from "../components/Cart/Carts";
 
 export default function Routes() {
   const router = createBrowserRouter([
@@ -37,6 +39,14 @@ export default function Routes() {
         {
           path: "productDetails/:id",
           element: <ProductDetails />,
+        },
+        {
+          path: "cart",
+          element: <Cart />,
+        },
+        {
+          path: "cart/:id",
+          element: <Carts />,
         },
         {
           path: "contact",

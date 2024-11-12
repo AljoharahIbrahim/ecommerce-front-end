@@ -4,42 +4,64 @@ import { Link, useNavigate } from "react-router-dom";
 import Styles from "../styles/NavBar.module.css";
 import { UserContext } from "../context/UserContextData";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
+import CartContextData, { CartContext } from "../context/CartContextData";
+
 export default function NavBar() {
+  // // check if the use is login => the add to cart button will show
+  // const [isLogin, setIsLogin] = useState(false);
+  // // using useEffect and local storage to check about use is login or not
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("login"));
+  //   if (user && user.isSignIn) {
+  //     setIsLogin(user.isSignIn);
+  //   }
+  // }, []);
+
   const [isDisabled, setIsDisabled] = useState(false);
   const [isDisabledRegister, setIsDisabledRegister] = useState(true);
-  // const [checkAdmin, setCheckAdmin] = useState();
-  const {
-    setLoginData,
-    setUserEmail,
-    setUserPassword,
-    userID,
-  } = useContext(UserContext);
-  // type of user
-  // const checkIsAdmin = JSON.parse(localStorage.getItem("login"));
-  // if (checkIsAdmin != null && checkIsAdmin.isSignIn && checkIsAdmin.isAdmin) {
-  //   setCheckAdmin(true);
-  // }
-    // in case local storage not empty show the logout button
-    useEffect(() => {
-      const checkStorage = localStorage.getItem("login");
-      if (checkStorage === null) {
-        setIsDisabled(true);
-        setIsDisabledRegister(true);
-      } else {
-        setIsDisabled(false);
-        setIsDisabledRegister(false);
-      }
-    }, [userID]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [cartisDisabled, setCartIsDisabled] = useState(false);
+ const {cart} = useContext(CartContext);
+  // calculate number of cart 
+   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("login"));
+
+    if (user && user.isSignIn) {
+      setIsAdmin(user.isAdmin);
+    }
+  }, []);
+
+  const { setLoginData, setUserEmail, setUserPassword, userID } =
+    useContext(UserContext);
+
+  useEffect(() => {
+    const checkStorage = localStorage.getItem("login");
+    if (checkStorage === null) {
+      setIsDisabled(true);
+      setIsDisabledRegister(true);
+      setCartIsDisabled(false);
+    } else {
+      setIsDisabled(false);
+      setIsDisabledRegister(false);
+      setCartIsDisabled(true);
+    }
+  }, [userID]);
 
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("login");
+    localStorage.removeItem("cart");
     setLoginData(null);
     setUserEmail();
     setUserPassword();
     // hide logoutbutton after delete storgae
     setIsDisabled(true);
     setIsDisabledRegister(true);
+    setCartIsDisabled(true);
     navigate("/");
   };
   return (
@@ -86,16 +108,19 @@ export default function NavBar() {
                   {" "}
                   Logout
                 </Link>
-                </li>
-                {/* <li className={Styles["nav-item"]}>
-                <Link to= {checkAdmin ? "/dashboard/admins" : "/dashboard/users"}
-                    className={Styles["nav-link"]}
-                    style={{ display: isDisabled ? "none" : "inline" }}
-                  >
-                    {" "}
-                    profile
-                  </Link>
-              </li> */}
+              </li>
+              <li>
+                <Link
+                  to={
+                    isAdmin ? "/dashboard/admins/view" : "/dashboard/users/view"
+                  }
+                  className={Styles["nav-link"]}
+                  style={{ display: isDisabled ? "none" : "inline" }}
+                >
+                  Dashboard
+                </Link>
+              </li>
+
               <li className={Styles["nav-item"]}>
                 <Link
                   to="/register"
@@ -104,6 +129,21 @@ export default function NavBar() {
                 >
                   {" "}
                   Register
+                </Link>
+              </li>
+              <li className={Styles["nav-item"]}>
+                <Link
+                  id="cart-icon"
+                  to="/cart"
+                  className={Styles["nav-link"]}
+                  // style={{ display: setCartIsDisabled ? "inline": "none"}}
+                  style={{ display: isDisabled ? "none" : "inline" }}
+                >
+                  {" "}
+                  <FontAwesomeIcon icon={faCartArrowDown} />
+                  {itemCount > 0 && (
+                    <span className="cart-item-count">{itemCount}</span>
+                  )}
                 </Link>
               </li>
             </ul>

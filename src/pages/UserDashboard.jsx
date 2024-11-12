@@ -4,8 +4,11 @@ import { useLocation } from "react-router-dom";
 
 export default function UserDashboard() {
     console.log("!!!!UserDashboard");
-      const { state } = useLocation();
-      console.log("state", state);
+  let { state } = useLocation();
+  if (state) {
+   state = JSON.parse(localStorage.getItem("login")).state;
+  }
+  console.log("state", state);
   return (
     <div>
       <div className="dashboard">

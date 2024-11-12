@@ -3,7 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function AdminDashboard() {
   console.log("!!!!AdminDashboard");
-  const { state } = useLocation();
+  let { state } = useLocation();
+  // if (state) {
+    //   console.log("****");
+    //  console.log(state);
+    state = JSON.parse(localStorage.getItem("login"));
+    console.log("****m", state.state);
+    state=state.state
+  //  }
   console.log("state", state);
     return (
       <div className="dashboard-container">

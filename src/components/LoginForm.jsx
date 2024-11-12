@@ -67,6 +67,7 @@ export default function LoginForm() {
             userToken: loginData,
             isSignIn: true,
             isAdmin: checkIsAdmin,
+            state: userData,
           })
         );
 
