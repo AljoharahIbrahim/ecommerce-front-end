@@ -34,6 +34,7 @@ export default function UserContextData({ children }) {
 
   const getUserRegiterationInformation = async () => {
     console.log("getUserRegiterationInformation");
+    if (registerUser.UserName ==="") return; // just for null data not call the end point 
     try {
       setIsLoading(true);
       const response = await register(
@@ -55,6 +56,7 @@ export default function UserContextData({ children }) {
   };
   const getUserLoginInformation = async () => {
     console.log("**UserContextData");
+    if (checkUserData.userEmail ==="") return;
     try {
       setIsLoading(true);
       // console.log(" checkUserData.userEmail=", checkUserData.userEmail);
@@ -79,16 +81,17 @@ export default function UserContextData({ children }) {
 
   const getUserByIdInformation = async () => {
     console.log("----from getUserByIdInformation");
-    try {
-      setIsLoading(true);
-      const response = await getUserById(userID, userToken);
-      console.log(response);
-      setUserData(response.data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
+    if (!userID || !userToken) return;
+       try {
+         setIsLoading(true);
+         const response = await getUserById(userID, userToken);
+         console.log(response);
+         setUserData(response.data);
+       } catch (error) {
+         setError(error);
+       } finally {
+         setIsLoading(false);
+       }
   };
 
   useEffect(() => {
@@ -134,7 +137,7 @@ export default function UserContextData({ children }) {
       >
         {children}
       </UserContext.Provider>
-      ;
+      
     </>
   );
 }

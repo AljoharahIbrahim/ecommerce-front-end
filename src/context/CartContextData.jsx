@@ -66,19 +66,19 @@ export default function CartContextData({ children }) {
   // cart functions
 
   const createNewOrder = async () => {
-    try {
-      setIsLoading(true);
-      const response = await createAnewOrder(orderItems, method, userToken);
-      console.log(response);
-      setResponeSuccessCreateOrder(true);
-      localStorage.removeItem("cart");
-      setCart([]);
-
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
+    if (!orderItems  || !method || !userToken) return; 
+      try {
+        setIsLoading(true);
+        const response = await createAnewOrder(orderItems, method, userToken);
+        console.log(response);
+        setResponeSuccessCreateOrder(true);
+        localStorage.removeItem("cart");
+        setCart([]);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
   };
 
   // useEffect to call the cart functionality
@@ -88,27 +88,74 @@ export default function CartContextData({ children }) {
   }, [orderItems]);
 
   //2 load loadCartFromLocalStorage
+const addToCart = (product) => {
+  setCart((prevCart) => {
+    // Find if the product already exists in the cart
+    const existingProductIndex = prevCart.findIndex(
+      (item) => item.productId === product.productId
+    );
 
+    let updatedCart;
 
-  // addToCart
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingProductIndex = prevCart.findIndex(
-        (item) => item.productId === product.productId
+    // If product exists in the cart, update the quantity
+    if (existingProductIndex >= 0) {
+      updatedCart = prevCart.map(
+        (item, index) =>
+          index === existingProductIndex
+            ? { ...item, quantity: item.quantity + 1 } // Increment quantity
+            : item // Keep other items unchanged
       );
-      let updatedCart;
+    } else {
+      updatedCart = [...prevCart, { ...product, quantity: 1 }];
+    }
 
-      if (existingProductIndex >= 0) {
-        updatedCart = [...prevCart];
-        updatedCart[existingProductIndex].quantity += 1;
-      } else {
-        updatedCart = [...prevCart, { ...product, quantity: 1 }];
+    // Save the updated cart to localStorage
+    saveCartToLocalStorage(updatedCart);
+
+    return updatedCart;
+  });
+};
+
+const updateLessQuantity = (product) => {
+  console.log("updateLessQuantity product", product);
+
+  setCart((prevCart) => {
+    const updatedCart = prevCart.map((item) => {
+      if (item.productId === product.productId) {
+        return {
+          ...item,
+          quantity: item.quantity > 1 ? item.quantity - 1 : 1,
+        };
       }
-
-      saveCartToLocalStorage(updatedCart); 
-      return updatedCart;
+      return item; // Don't modify the other items
     });
-  };
+
+    // Save the updated cart to localStorage
+    saveCartToLocalStorage(updatedCart);
+
+    return updatedCart;
+  });
+};
+
+  // // addToCart
+  // const addToCart = (product) => {
+  //   setCart((prevCart) => {
+  //     const existingProductIndex = prevCart.findIndex(
+  //       (item) => item.productId === product.productId
+  //     );
+  //     let updatedCart;
+
+  //     if (existingProductIndex >= 0) {
+  //       updatedCart = [...prevCart];
+  //       updatedCart[existingProductIndex].quantity += 1;
+  //     } else {
+  //       updatedCart = [...prevCart, { ...product, quantity: 1 }];
+  //     }
+
+  //     saveCartToLocalStorage(updatedCart); 
+  //     return updatedCart;
+  //   });
+  // };
 
   // delete 
   const deleteFromCart = (product) =>
@@ -121,21 +168,22 @@ export default function CartContextData({ children }) {
     });
   };
 
-  // update quantity
-  const updateLessQuantity = (product) => {
-    // find index of update product
-    const index = cart.findIndex((item) => item.productId === product.productId);
-    // save previous cart information 
-    let updateData;
-    updateData = [...cart];
-    // update quantity using index of the target object
-    if (updateData[index].quantity > 1)
-    {
-      updateData[index].quantity = updateData[index].quantity - 1;
-    }
-    //save update data fot local storage 
-    saveCartToLocalStorage(updateData);
-  };
+  // // update quantity
+  // const updateLessQuantity = (product) => {
+  //   console.log("updateLessQuantity product", product);
+  //   // find index of update product
+  //   const index = cart.findIndex((item) => item.productId === product.productId);
+  //   // save previous cart information 
+  //   let updateData;
+  //   updateData = [...cart];
+  //   // update quantity using index of the target object
+  //   if (updateData[index].quantity > 1)
+  //   {
+  //     updateData[index].quantity = updateData[index].quantity - 1;
+  //   }
+  //   //save update data fot local storage 
+  //   saveCartToLocalStorage(updateData);
+  // };
 
   //---------------
   return (
