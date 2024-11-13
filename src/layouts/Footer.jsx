@@ -1,18 +1,5 @@
-// import React from "react";
-
-// export default function Footer() {
-//   return (
-//     <div className="footer">
-//       <div className="container">
-//         <p> e-commerce website &copy; {new Date().getFullYear()}</p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// using materila ui 
-
 import React from "react";
+
 import { Box, Container, Typography } from "@mui/material";
 
 export default function Footer() {

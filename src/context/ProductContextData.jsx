@@ -12,7 +12,6 @@ import {
 export const ProductContext = createContext();
 
 export default function ProductContextData({ children }) {
-  // ctrate data state
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +21,7 @@ export default function ProductContextData({ children }) {
   const [totalPages, setTotalPages] = useState(1);
   const [searchValue, setSearchValue] = useState([]);
   const [sort, setSort] = useState("");
-  // create product useState
+
   const [createProduct, setCreateProduct] = useState({
     productName: "",
     productPrice: "",
@@ -35,51 +34,41 @@ export default function ProductContextData({ children }) {
   const [createProductStatus, setCreateProductStatus] = useState(false);
   const [responeSuccessCreateProduct, setResponeSuccessCreateProduct] =
     useState(false);
-  // for delete product
   const [deleteProductID, setDeleteProductID] = useState(null);
   const [createDeleteProductOrder, setCreateDeleteProductOrder] =
     useState(false);
   const [productDeleteResponse, setProductDeleteResponse] = useState(false);
-  // for update product
   const [productData, setProductData] = useState({});
   const [productID, setProductID] = useState();
   const [updateProductOrder, setUpdateProductOrder] = useState(false);
   const [productUpdateResponse, setProductUpdateResponse] = useState(false);
 
   const getProducts = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getAllProducts(
-          pageNumber,
-          pageSize,
-          searchValue,
-          sort
-        );
-        // console.log("***********from product services*************");
-        // console.log(response);
-        const data = response.data;
-        // console.log("data=" + data);
-        const productsData = data.items.$values;
-        // console.log("productsData" + productsData);
-        setProducts(productsData);
-        // setTotalPages(data.totalItems);
-        // const totalItems = data.items.$values.length;
-        const totalItems = data.totalItems;
-        // console.log("totalItems=> " + totalItems + " | pageSize=>" + pageSize);
-        // console.log("totalItems / pageSize =" + Math.ceil(totalItems / pageSize));
-        setTotalPages(Math.ceil(totalItems / pageSize));
-        setData(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
+    try {
+      setIsLoading(true);
+      const response = await getAllProducts(
+        pageNumber,
+        pageSize,
+        searchValue,
+        sort
+      );
+
+      const data = response.data;
+      const productsData = data.items.$values;
+      setProducts(productsData);
+      const totalItems = data.totalItems;
+      setTotalPages(Math.ceil(totalItems / pageSize));
+      setData(data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // create product
   const addNewProduct = async () => {
-    console.log("addNewProduct");
-        if ( !createProduct) return;
+    if (!createProduct) return;
 
     try {
       setIsLoading(true);
@@ -93,56 +82,42 @@ export default function ProductContextData({ children }) {
         createProduct.productCategoryID,
         adminToken
       );
-      console.log("addNewProduct response =>", response);
-      console.log(
-        " before :setResponeSuccessCreateProduct response =>",
-        responeSuccessCreateProduct
-      );
-
       setResponeSuccessCreateProduct(true);
-      console.log(
-        "after :setResponeSuccessCreateProduct response =>",
-        responeSuccessCreateProduct
-      );
     } catch (error) {
       setError(error);
     } finally {
       setIsLoading(false);
     }
   };
+
   // delete product
   const deleteProduct = async () => {
-    console.log("**deleteProduct response");
     if (!deleteProductID) return;
-      try {
-        setIsLoading(true);
-        const response = await deleteProductByID(deleteProductID, adminToken);
-        console.log(" deleteProduct response", response);
-        setProductDeleteResponse(true);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
+    try {
+      setIsLoading(true);
+      const response = await deleteProductByID(deleteProductID, adminToken);
+      // console.log(" deleteProduct response", response);
+      setProductDeleteResponse(true);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // update Product
   const updateProductByID = async () => {
-    if (!productData|| !productID || !adminToken) return;
-      try {
-        setIsLoading(true);
-        console.log("updateProductByID=>", productData, productID, adminToken);
-        const response = await updateProduct(
-          productData,
-          productID,
-          adminToken
-        );
-        console.log(response);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
+    if (!productData || !productID || !adminToken) return;
+    try {
+      setIsLoading(true);
+      console.log("updateProductByID=>", productData, productID, adminToken);
+      const response = await updateProduct(productData, productID, adminToken);
+      console.log(response);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // useEffect
@@ -153,7 +128,6 @@ export default function ProductContextData({ children }) {
   useEffect(() => {
     getProducts();
   }, [searchValue, pageNumber, pageSize, sort]);
-  // console.log("searchValue =" + searchValue);
 
   useEffect(() => {
     addNewProduct();
@@ -210,7 +184,6 @@ export default function ProductContextData({ children }) {
           setUpdateProductOrder,
           productUpdateResponse,
           setProductUpdateResponse,
-   
         }}
       >
         {children}

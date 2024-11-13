@@ -13,14 +13,14 @@ export default function UserContextData({ children }) {
     Address: "",
     PhoneNumber: "",
   });
-    const [createUser, setCreateUser] = useState(false);
+  const [createUser, setCreateUser] = useState(false);
   // ctrate data state
   const [checkUserData, setCheckUserData] = useState({
     userEmail: "",
     userPassword: "",
   }); // this use for login form component
-  const [userData, setUserData] = useState(null); // this get information from end point
-  const [loginData, setLoginData] = useState(null); // this get information from end point
+  const [userData, setUserData] = useState(null);
+  const [loginData, setLoginData] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [responeSuccessRegister, setResponeSuccessRegister] = useState(false);
@@ -28,13 +28,12 @@ export default function UserContextData({ children }) {
   const [error, setError] = useState(null);
   const [userToken, setUserToken] = useState(null);
 
-  const [userEmail, setUserEmail] = useState(""); // this for login form component to easy handle and send it to api , we can later composite as object
-  const [userPassword, setUserPassword] = useState(""); // this for login form component to easy handle and send it to api , we can later composite as object
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
   const [userID, setUserID] = useState(null);
 
   const getUserRegiterationInformation = async () => {
-    console.log("getUserRegiterationInformation");
-    if (registerUser.UserName ==="") return; // just for null data not call the end point 
+    if (registerUser.UserName === "") return;
     try {
       setIsLoading(true);
       const response = await register(
@@ -44,7 +43,7 @@ export default function UserContextData({ children }) {
         registerUser.Address,
         registerUser.PhoneNumber
       );
-      console.log("%response.data", response.data);
+      // console.log("%response.data", response.data);
       setUserData(response.data);
       setResponeSuccessRegister(true);
       return response.success;
@@ -55,20 +54,15 @@ export default function UserContextData({ children }) {
     }
   };
   const getUserLoginInformation = async () => {
-    console.log("**UserContextData");
-    if (checkUserData.userEmail ==="") return;
+    if (checkUserData.userEmail === "") return;
     try {
       setIsLoading(true);
-      // console.log(" checkUserData.userEmail=", checkUserData.userEmail);
-      // console.log("checkUserData.userPassword=",checkUserData.userPassword);
 
       const response = await login(
         checkUserData.userEmail,
         checkUserData.userPassword
       );
-      //   const data = response.data;
-      //   const userLoginData = data.items.$values;
-      console.log("response**", response.token);
+      // console.log("response**", response.token);
       setUserToken(response.token);
       //   setUserData(response.token);
       setLoginData(response.token);
@@ -80,18 +74,17 @@ export default function UserContextData({ children }) {
   };
 
   const getUserByIdInformation = async () => {
-    console.log("----from getUserByIdInformation");
     if (!userID || !userToken) return;
-       try {
-         setIsLoading(true);
-         const response = await getUserById(userID, userToken);
-         console.log(response);
-         setUserData(response.data);
-       } catch (error) {
-         setError(error);
-       } finally {
-         setIsLoading(false);
-       }
+    try {
+      setIsLoading(true);
+      const response = await getUserById(userID, userToken);
+      console.log(response);
+      setUserData(response.data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -137,7 +130,6 @@ export default function UserContextData({ children }) {
       >
         {children}
       </UserContext.Provider>
-      
     </>
   );
 }

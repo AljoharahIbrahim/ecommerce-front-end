@@ -1,55 +1,5 @@
-// import React from "react";
-// import Profile from "./Profile";
-// import { useLocation } from "react-router-dom";
-
-// export default function UserDashboard() {
-//     console.log("!!!!UserDashboard");
-//   let { state } = useLocation();
-//   if (state) {
-//    state = JSON.parse(localStorage.getItem("login")).state;
-//   }
-//   console.log("state", state);
-//   return (
-//     <div>
-//       <div className="dashboard">
-//         <div className="header">
-//           <h1>User Dashboard</h1>
-//         </div>
-//         <div className="chip-container">
-//           <div className="chip">Buy Product</div>
-//           {/* <div className="chip">New</div>
-//           <div className="chip">Pending</div>
-//           <div className="chip">Completed</div> */}
-//         </div>
-//         <div className="content">
-//           <div>
-//             <div className="profile">
-//               <div className="profile-header">
-//                 <h1 className="profile-name">{state.userName}</h1>
-//               </div>
-//               <div className="profile-info">
-//                 <p className="profile-item">
-//                   <strong>Phone:</strong> {state.phoneNumber}
-//                 </p>
-//                 <p className="profile-item">
-//                   <strong>Address:</strong> {state.address}
-//                 </p>
-//                 <p className="profile-item">
-//                   <strong>Email:</strong> {state.email}
-//                 </p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-// using material ui 
-
 import React from "react";
+
 import Profile from "./Profile";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -70,9 +20,8 @@ export default function UserDashboard() {
   const handleNavigate = () => {
     navigate("/products");
   };
-  if (state)
-  {
-     state = JSON.parse(localStorage.getItem("login")).state;
+  if (state) {
+    state = JSON.parse(localStorage.getItem("login")).state;
   }
   console.log("state", state);
   return (
@@ -102,16 +51,7 @@ export default function UserDashboard() {
           {" "}
           buy product{" "}
         </Button>
-        {/* Chip Container for action items */}
-        {/* <Box sx={{ marginBottom: 4 }}> */}
-        {/* <Chip label="Buy Product" color="primary" sx={{ marginRight: 1 }} /> */}
-        {/* Uncomment if needed */}
-        {/* <Chip label="New" color="secondary" sx={{ marginRight: 1 }} />
-          <Chip label="Pending" color="warning" sx={{ marginRight: 1 }} />
-          <Chip label="Completed" color="success" sx={{ marginRight: 1 }} /> */}
-        {/* </Box> */}
 
-        {/* Profile Section */}
         <Box>
           <Grid container spacing={4}>
             <Grid item xs={12} md={4}>
@@ -148,11 +88,6 @@ export default function UserDashboard() {
                 </Typography>
               </Paper>
             </Grid>
-
-            {/* Optionally, Profile component can be added here if needed */}
-            {/* <Grid item xs={12} md={8}>
-              <Profile />
-            </Grid> */}
           </Grid>
         </Box>
       </Box>

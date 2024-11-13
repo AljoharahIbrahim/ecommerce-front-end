@@ -1,50 +1,15 @@
-// import React from "react";
-// import { useLocation, useParams } from "react-router-dom";
-
-// export default function ProductDetails() {
-//   const parms = useParams();
-//   console.log(parms);
-//   const { state } = useLocation();
-//   console.log(state);
-//   if (!state) {
-//     return <h1>product not found</h1>;
-//   }
-//   return (
-//     <div className="product-card">
-//       <h2> Product Details</h2>
-//       <img src={state.image} alt={state.name} />
-//       <p>
-//         <strong>Name: </strong>
-//         {state.name}
-//       </p>
-//       <p>
-//         <strong>Category: </strong>
-//         {state.categoryName}
-//       </p>
-//       <p>
-//         <strong>StockQuantity: </strong>
-//         {state.stockQuantity}
-//       </p>
-//       <p>
-//         <strong>Price: </strong>
-//         {state.price}
-//       </p>
-//       <p>
-//         <strong>Description: </strong>
-//         {state.description}
-//       </p>
-//       <strong>UpdatedDate: </strong>
-//       {state.updatedDate}
-//     </div>
-//   );
-// }
-
-
-//using material ui
-
 import React from "react";
+
 import { useLocation, useParams } from "react-router-dom";
-import { Box, Card, CardContent, CardMedia, Grid, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+  Button,
+} from "@mui/material";
 
 export default function ProductDetails() {
   const parms = useParams();
@@ -73,36 +38,53 @@ export default function ProductDetails() {
               sx={{ objectFit: "contain" }}
             />
             <CardContent>
-              <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ fontWeight: "bold" }}
+              >
                 {state.name}
               </Typography>
-              <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 1 }}>
-                <strong>Category: </strong>{state.categoryName}
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                sx={{ marginBottom: 1 }}
+              >
+                <strong>Category: </strong>
+                {state.categoryName}
               </Typography>
-              <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 1 }}>
-                <strong>Stock Quantity: </strong>{state.stockQuantity}
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                sx={{ marginBottom: 1 }}
+              >
+                <strong>Stock Quantity: </strong>
+                {state.stockQuantity}
               </Typography>
-              <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: 2 }}>
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: "bold", marginBottom: 2 }}
+              >
                 <strong>Price: </strong>${state.price}
               </Typography>
-              <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 1 }}>
-                <strong>Description: </strong>{state.description}
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                sx={{ marginBottom: 1 }}
+              >
+                <strong>Description: </strong>
+                {state.description}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                <strong>Updated Date: </strong>{state.updatedDate}
+                <strong>Updated Date: </strong>
+                {state.updatedDate}
               </Typography>
             </CardContent>
           </Card>
         </Grid>
-
-        {/* You can add additional content or actions here */}
       </Grid>
-      
-      <Box sx={{ marginTop: 3, textAlign: "center" }}>
-        {/* <Button variant="contained" color="primary" sx={{ padding: "10px 20px" }}>
-          Add to Cart
-        </Button> */}
-      </Box>
+
+      <Box sx={{ marginTop: 3, textAlign: "center" }}></Box>
     </Box>
   );
 }

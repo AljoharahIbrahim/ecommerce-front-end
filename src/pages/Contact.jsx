@@ -1,16 +1,3 @@
-// import React from "react";
-
-// const Contact = () => {
-//   return (
-//     <div className="contact">
-//       <h2>Contact Page</h2>
-//     </div>
-//   );
-// };
-
-// export default Contact;
-
-
 import React, { useState } from "react";
 import {
   Container,
@@ -22,13 +9,11 @@ import {
   Alert,
 } from "@mui/material";
 
-// Include Formspree Script in the HTML header
 const formScript = `
   <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
 `;
 
 const Contact = () => {
-  // State to handle form submission and validation
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,7 +24,6 @@ const Contact = () => {
   const [formError, setFormError] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  // Handle form input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -195,4 +179,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

@@ -1,14 +1,9 @@
-// import React from 'react'
-// import Carts from '../components/Cart/Carts';
-
-// export default function Cart() {
-//   return <div><Carts/></div>;
-// }
 
 
 // using material ui 
 
 import React from "react";
+
 import Carts from "../components/Cart/Carts";
 import { Container, Box, Typography } from "@mui/material";
 

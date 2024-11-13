@@ -1,12 +1,3 @@
-// import React from 'react'
-
-// export default function Home() {
-//   return (
-//     <>HomePage</>
-//   )
-// }
-
-// using material ui 
 import React from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import { keyframes } from "@emotion/react";
@@ -30,20 +21,19 @@ const Home = () => {
       sx={{
         position: "relative",
         width: "100%",
-        height: "100vh", // Full height of the viewport
-        margin: 0, // Remove margin
-        padding: 0, // Remove padding
+        height: "100vh",
+        margin: 0,
+        padding: 0,
         borderRadius: 0,
         overflow: "hidden",
         boxShadow: 0,
         backgroundImage: `url("https://plus.unsplash.com/premium_photo-1672883552341-eaebc9240719?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-        backgroundSize: "cover", // Ensures the image covers the entire container
+        backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed", // Keeps the background fixed during scroll
-        animation: `${fadeIn} 2s ease-out`, // Animation for the entire section
+        backgroundAttachment: "fixed",
+        animation: `${fadeIn} 2s ease-out`,
       }}
     >
-      {/* Overlay to make text more readable */}
       <Box
         sx={{
           position: "absolute",
@@ -51,12 +41,11 @@ const Home = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.5)", // Adjusted for better readability
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
           zIndex: 1,
         }}
       />
 
-      {/* Content inside the Box */}
       <Box
         sx={{
           position: "absolute",
@@ -66,7 +55,7 @@ const Home = () => {
           color: "white",
           textAlign: "center",
           zIndex: 2,
-          padding: "0 1rem", // Added padding for responsiveness
+          padding: "0 1rem",
         }}
       >
         <Typography
@@ -108,7 +97,7 @@ const Home = () => {
             boxShadow: 3,
             "&:hover": {
               boxShadow: 6,
-              transform: "scale(1.05)", // Slight animation on hover
+              transform: "scale(1.05)",
             },
           }}
         >
