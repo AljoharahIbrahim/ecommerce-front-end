@@ -27,7 +27,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { CartContext } from "../context/CartContextData";
 import { UserContext } from "../context/UserContextData";
-import Styles from "../styles/NavBar.module.css";
 
 export default function NavBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
