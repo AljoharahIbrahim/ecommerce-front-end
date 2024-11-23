@@ -70,21 +70,22 @@ const Home = () => {
           Welcome to Our Online Store!
         </Typography>
 
-        <Typography
-          variant="body1"
-          color="textSecondary"
-          sx={{
-            fontSize: { xs: "1rem", sm: "1.25rem" },
-            lineHeight: "1.8",
-            maxWidth: 600,
-            margin: "0 auto",
-            marginBottom: 3,
-            animation: `${fadeIn} 2s ease-out`,
-          }}
-        >
-          Discover amazing deals and explore a wide variety of products at
-          unbeatable prices. Start shopping today!
-        </Typography>
+     <Typography
+  variant="body1"
+  color="white"  // Change color to white
+  sx={{
+    fontSize: { xs: "1rem", sm: "1.25rem" },
+    lineHeight: "1.8",
+    maxWidth: 600,
+    margin: "0 auto",
+    marginBottom: 3,
+    animation: `${fadeIn} 2s ease-out`,
+  }}
+>
+  Discover amazing deals and explore a wide variety of products at
+  unbeatable prices. Start shopping today!
+</Typography>
+
 
         <Button
           onClick={handleNavigate}
